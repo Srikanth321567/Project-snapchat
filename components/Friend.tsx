@@ -5,6 +5,7 @@ import { formatDate} from '@/lib/utils';
 import {IoSend,IoSendOutline} from 'react-icons/io5';
 import {RiCheckboxBlankFill} from 'react-icons/ri';
 import {MdCheckCircleOutline} from 'react-icons/md';
+import { IoMdSend } from 'react-icons/io';
 
 const Friend = ({user}:{user:any}) => {
   const lastMessage = user.lastMessage;
@@ -13,7 +14,7 @@ const Friend = ({user}:{user:any}) => {
   const amISender = lastMessage && lastMessage?.senderId?._id !== user.participants[0]._id;
   const isMessageOpened = lastMessage?.opened;
   let messageStatus:string = '';
-  let icon:JSX.Element;
+  let icon:JSX.Element = <IoMdSend/>;
 
 
   if(amISender){
