@@ -15,7 +15,7 @@ cloudinary.config({
  });
 
 //module level server actions
-export const snapSendMessage = async(content:string,receiverId:string,messageType:'image' | 'text')=>{
+export const snapSendMessage = async(content:string,receiverId:any,messageType:'image' | 'text')=>{
      try {
           await connectDatabase();
           const authUser = await auth();

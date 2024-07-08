@@ -16,15 +16,14 @@ import { useRouter } from "next/navigation"
     const [sendMessageLoading, setSendMessageLoading] = useState(false);
     const [selectedUser,setSelectedUser]=useState<UserDocument>();
     const router = useRouter();
-
-    const selectedUserHandler = (user:UserDocument) =>{
+    let selectedUserHandler = (user:UserDocument) =>{
         setSelectedUser(user);
     }
     const sendSnapMessageHandler = async () =>{
       setSendMessageLoading(true);
         try {
           await snapSendMessage(
-            selectedFile, selectedUser?._id,'image'
+            selectedFile,selectedUser?._id,'image'
           );
           router.push( `/chat/${selectedUser?._id}`);
         } catch (error) {
@@ -63,7 +62,7 @@ import { useRouter } from "next/navigation"
           {
             users.map((user:UserDocument)=>{
               return(
-                <div key={user._id} onClick={()=>selectedUserHandler(user)} className={`${selectedUser?._id === user._id ? 'bg-gray-200' : null} flex items-center gap-5 cursor-pointer p-2 rounded-md hover:bg-gray-200`}>
+                <div key={String(user._id)} onClick={()=>selectedUserHandler(user)} className={`${selectedUser?._id === user._id ? 'bg-gray-200' : null} flex items-center gap-5 cursor-pointer p-2 rounded-md hover:bg-gray-200`}>
                    <Avatar>
                       <AvatarImage src={user.profilePhoto} alt="user"/>
                    </Avatar>
